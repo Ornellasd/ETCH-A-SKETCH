@@ -1,19 +1,25 @@
 const gridContainer = document.querySelector('.grid-container');
+let count = 0;
 
-const createGrid = () => {
-	for(let i = 0; i < 16; i++) {
-		for(let j = 0; j < 16; j++) {
-			const div = document.createElement('div');
-			div.setAttribute('class', 'grid-item');
-			gridContainer.appendChild(div);
-		}
-	}
+const createGrid = (size) => {
+    // need to figure out best way to have size determine grid-template-columns and grid-template-rows
+    for(let i = 0; i < size; i++) {
+        for(let j = 0; j < size; j++) {
+            count++;
+            const div = document.createElement('div');
+            div.setAttribute('class', 'grid-item');
+            div.setAttribute('id', 'square-' + count);
+            gridContainer.appendChild(div);
+        }
+    }
 }
 
-createGrid();
-/*
-	<div class="grid-item" id="1" style="background-color: blue">1</div>
-	<div class="grid-item" id="2" style="background-color: red">2</div>
-	<div class="grid-item" id="3" style="background-color: green">3</div>
-	<div class="grid-item" id="4" style="background-color: green">4</div>
-*/
+createGrid(16);
+
+const squares = document.querySelectorAll('.grid-item');
+
+for (let el of squares) {
+    el.addEventListener('mouseenter', () => {
+        el.style.backgroundColor = "black";
+    });
+}
