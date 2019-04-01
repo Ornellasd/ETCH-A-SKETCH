@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style type="text/css">
+		body {
+			margin: 0;
+			padding: 0;
+			text-align: center;
+		}
 		.grid-container {
   			display: grid;
-  			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  			grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  			margin: 0 auto;
+  			text-align: left;
+  			width: 800px;
 		}
-
+		
 		.grid-item{
 			border: 1px solid black;
 			padding: 20px;
 			text-align: center;
 		}
+
 	</style>
 	<title>Etch-A-Sketch</title>
 </head>
 <body>
-	<div class="grid-container"></div>
-	<button id="black">Black</button>
-	<button id="color">Color</button>
-	<button id="reset">Reset Grid</button>
+	<div class="container">
+		<div class="grid-container"></div>
+		<button id="black">Black</button>
+		<button id="color">Color</button>
+		<button id="reset">Reset Grid</button>	
+	</div>
+	
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

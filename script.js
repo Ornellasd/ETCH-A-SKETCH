@@ -1,3 +1,4 @@
+const mainContainer = document.querySelector('.container');
 const gridContainer = document.querySelector('.grid-container');
 const resetBtn = document.querySelector('#reset');
 const blackBtn = document.querySelector('#black');
@@ -6,7 +7,8 @@ let count = 0;
 let squares;
 
 const createGrid = (size) => {
-    // need to figure out best way to have size determine grid-template-columns and grid-template-rows
+    let columnsRows = '1fr '.repeat(size);
+    gridContainer.setAttribute('style', `grid-template-columns: ${columnsRows}; grid-template-rows: ${columnsRows}`);
     for(let i = 0; i < size; i++) {
         for(let j = 0; j < size; j++) {
             count++;
@@ -16,43 +18,39 @@ const createGrid = (size) => {
             gridContainer.appendChild(div);
         }
     }
-    squares = document.querySelectorAll('.grid-item');
+    squares = document.querySelectorAll('.grid-item');   
 }
 
-function get_random_color() {
-  function c() {
-    var hex = Math.floor(Math.random()*256).toString(16);
-    return ("0"+String(hex)).substr(-2); // pad with zero
-  }
-  return "#"+c()+c()+c();
+const changeGridColor = (color) => {
+    for(let el of squares) {
+        el.addEventListener('mouseenter', () => {
+            if(color === 'random') {
+                el.style.backgroundColor = '#'+Math.random().toString(16).substr(-6)  
+            } else {
+                el.style.backgroundColor = color;    
+            }
+        });
+    }
 }
 
 createGrid(16);
 
 for (let el of squares) {
-    el.addEventListener('mouseenter', () => {
-        el.style.backgroundColor = get_random_color();
-    });
+    changeGridColor('random');
 }
 
 resetBtn.addEventListener('click', () => {
-    for (let el of squares) {
-        el.style.backgroundColor = "white";
+    const gridSize = prompt('How big?');
+    while(gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild);
     }
-});
-
-blackBtn.addEventListener('click', () => {
-    for (let el of squares) {
-        el.addEventListener('mouseenter', () => {
-            el.style.backgroundColor = "black";
-        });
-    }
+    createGrid(gridSize);
 });
 
 colorBtn.addEventListener('click', () => {
-    for (let el of squares) {
-        el.addEventListener('mouseenter', () => {
-            el.style.backgroundColor = get_random_color();
-        });
-    }
+    changeGridColor('random');
+});
+
+blackBtn.addEventListener('click', () => {
+    changeGridColor('black');
 });
